@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_01votacion_student,school.student,model_school_student,base.group_user,1,1,1,1
+access_01votacion_candidate,candidate.student,model_candidate_student,base.group_user,1,1,1,1
+access_01votacion_campus,school.campus,model_school_campus,base.group_user,1,1,1,1
+access_01votacion_votingProcess,voting.process,model_voting_process,base.group_user,1,1,1,1
+access_01votacion_candidateVote,voting.candidate.vote,model_voting_candidate_vote,base.group_user,1,1,1,1
+access_01votacion_userVote,user.vote,model_user_vote,base.group_user,1,1,1,1
+access_01votacion_validationcheckvote,validation.check.vote,model_validation_check_vote,base.group_user,1,1,1,1
+access_01votacion_votingcandidatevote,voting.candidate.vote,model_voting_candidate_vote,base.group_user,1,1,1,1
+access_01votacion_downloadvotingtemplatewizard,download.voting.template.wizard,model_download_voting_template_wizard,base.group_user,1,1,1,1

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="Student_tree_view" model="ir.ui.view">
+            <field name="name">student.tree.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="carrera"/>
+                    <field name="campus_name1"/>
+                    <field name="num_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="Student_form_view" model="ir.ui.view">
+            <field name="name">student.form.form</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="carrera"/>
+                    </group>
+                    <group>
+                        <field name="campus_name1" />
+                    </group>
+                    <group>
+                        <field name="num_id" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="student_action" model="ir.actions.act_window">
+            <field name="name">Estudiantes</field>
+            <field name="res_model">school.student</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!-- ________________CANDIDATOS_______________________________________________ -->
+
+        <record id="Candidate_tree_view" model="ir.ui.view">
+            <field name="name">Candidate.tree.view</field>
+            <field name="model">candidate.student</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="image" widget="image" options="{'size': [50, 50]}"/>
+                    <field name="name"/>
+                    <field name="num_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="Candidate_form_view" model="ir.ui.view">
+            <field name="name">Candidate.form.view</field>
+            <field name="model">candidate.student</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="image" widget="image"/>
+                    </group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="num_id" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="Candidate_action" model="ir.actions.act_window">
+            <field name="name">Candidatos</field>
+            <field name="res_model">candidate.student</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!-- ________________CAMPUS_______________________________________________ -->
+
+        <record id="campus_tree_view" model="ir.ui.view">
+            <field name="name">campus.tree.view</field>
+            <field name="model">school.campus</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group><field name="name"/>
+                    <field name="country_id"/>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="campus_form_view" model="ir.ui.view">
+            <field name="name">campus.form.view</field>
+            <field name="model">school.campus</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="country_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="campus_action" model="ir.actions.act_window">
+            <field name="name">Sedes</field>
+            <field name="res_model">school.campus</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!-- ________________VOTACIONES GENERAL_______________________________________________ -->
+         <record id="voting_process_tree_view" model="ir.ui.view">
+            <field name="name">voting.process.tree.view</field>
+            <field name="model">voting.process</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <!-- Botones existentes -->
+                        <button name="action_set_in_progress"
+                                string="In Progress"
+                                type="object"
+                                class="btn-primary"
+                                icon="fa-play" />
+                        <button name="action_set_closed"
+                                string="Closed"
+                                type="object"
+                                class="btn-danger"
+                                icon="fa-times" />
+                    </header>
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                    <field name="country_id"/>
+                    <field name="candidate_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista Form para procesos de votación -->
+        <record id="voting_process_form_view" model="ir.ui.view">
+            <field name="name">voting.process.form.view</field>
+            <field name="model">voting.process</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="state"/>
+                        <field name="country_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Candidatos">
+                            <field name="candidate_ids">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Conteo de votos">
+                            <field name="vote_count_ids" readonly="1">
+                                <tree editable="bottom">
+                                    <field name="candidate_image" widget="image"  style="float: left; margin-right: 10px;"/>
+                                    <field name="candidate_id"/>
+                                    <field name="vote_count"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="voting_process_action" model="ir.actions.act_window">
+            <field name="name">Procesos de Votación</field>
+            <field name="res_model">voting.process</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!-- ________________wizard______________________________________________ -->
+        <record id="view_download_voting_template_wizard_form" model="ir.ui.view">
+            <field name="name">download.voting.template.wizard.form</field>
+            <field name="model">download.voting.template.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Descargar e Importar Plantilla de Procesos de Votación">
+                    <group>
+                        <field name="file" filename="file_name" string="Archivo CSV"/>
+                    </group>
+                    <footer>
+                        <button string="Descargar Plantilla" type="object" class="btn-secondary" name="action_download_template"/>
+                        <button string="Importar" type="object" class="btn-primary" name="action_import"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_download_voting_template_wizard" model="ir.actions.act_window">
+            <field name="name">Descargar e Importar Plantilla de Procesos de Votación</field>
+            <field name="res_model">download.voting.template.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field> <!-- Abre el wizard como un diálogo modal -->
+        </record>
+
+<!-- ________________VOTACIONES USUARIO______________________________________________ -->
+
+        <record id="validation_check_vote_form_view" model="ir.ui.view">
+            <field name="name">validation.check.form.view</field>
+            <field name="model">validation.check.vote</field>
+            <field name="arch" type="xml">
+                <form __validate__="1">
+                    <group>
+                        <field name="student_id_input" placeholder="Ingresa el ID del estudiante" />
+                        <button string="Validar Estudiante" type="object" name="check_student_id" class="btn-primary"/>
+                    </group>
+                    <group>
+                        <field name="student_validated" invisible="1"/>
+                        <field name="selected_process_id" invisible="not student_validated" />
+                        <field name="is_available" invisible="1"/>
+                        <field name="candidates_filtered_ids" invisible="1"/>
+                        <button string="Validar Disponibilidad" type="object" name="check_voting_availability" class="btn-primary" invisible="not student_validated" />
+                    </group>
+                    <notebook>
+                        <page string="Votación Disponible" invisible='not is_available'>
+                            <!-- Mostrar contenido cuando is_available es True -->
+                            <div invisible='not is_available'>Candidatos disponibles para la votacion.</div>
+                            <field name="selected_candidate_id" options='{"no_create": True}'/>
+                            <field name="selected_candidate_info"  />
+                            <field name="selected_candidate_image" widget="image" style="display: block; margin-left: auto; margin-right: auto; width: 200px; height: 200px; object-fit: cover;"  />
+                        <!-- Agregar botón de votar -->
+                            <button string="Votar" type="object" name="vote_candidate" class="btn-primary" />
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_vote" model="ir.actions.act_window">
+            <field name="name">Votacion</field>
+            <field name="res_model">validation.check.vote</field>
+            <field name="view_mode">form</field>
+            <field name="domain">[]</field>
+        </record>
+
+
+<!-- ________________ventanas______________________________________________ -->
+        <menuitem id="menu_votaciones" name="Votaciones" sequence="10"/>
+
+        <menuitem id="menu_students" name="Estudiantes" parent="menu_votaciones" sequence="30" action="student_action"/>
+
+        <menuitem id="menu_candidatos" name="Candidatos" parent="menu_votaciones" sequence="40" action="Candidate_action"/>
+
+        <menuitem id="menu_campus" name="Sede" parent="menu_votaciones" sequence="20" action="campus_action"/>
+
+        <menuitem id="menu_voting_process" name="Procesos de Votación" parent="menu_votaciones" sequence="50"/>
+
+        <menuitem id="menu_voting_process_user" name="Votacion" parent="menu_voting_process" action="action_vote"/>
+
+        <menuitem id="menu_voting_process_conf" name="Configuracion" parent="menu_voting_process" action="voting_process_action"/>
+
+        <menuitem id="menu_voting_process_wizard2" name="WIZARD" parent="menu_voting_process" action="action_download_voting_template_wizard"/>
+
+    </data>
+</odoo>
+
+
+
